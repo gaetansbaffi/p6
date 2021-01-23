@@ -17,4 +17,4 @@ ng serve
 
 ouvrir navigateur sur > http://localhost:4200
 
-l'application est prête
+l'application est prête!
