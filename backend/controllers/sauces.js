@@ -20,7 +20,8 @@ exports.createSauce = (req, res, next) => {
 		.catch((error) => res.status(400).json({ error }));
 };
 
-exports.modifySauce = (req, res, _) => {
+exports.modifySauce = (req, res, next) => {
+	console.log(req.file);
 	const sauceObject = req.file
 		? {
 				...JSON.parse(req.body.sauce),
@@ -29,7 +30,7 @@ exports.modifySauce = (req, res, _) => {
 				}`,
 		  }
 		: { ...req.body };
-	console.log(req.body);
+
 	Sauce.updateOne(
 		{ _id: req.params.id },
 		{ ...sauceObject, _id: req.params.id }
