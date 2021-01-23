@@ -6,13 +6,17 @@ pour installation:
 Nouveau terminal:
 
 cd backend
+
 npm install
+
 nodemon server
 
 nouveau terminal:
 
 cd frontend
+
 npm install
+
 ng serve
 
 ouvrir navigateur sur > http://localhost:4200
