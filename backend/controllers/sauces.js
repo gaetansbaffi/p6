@@ -21,7 +21,6 @@ exports.createSauce = (req, res, next) => {
 };
 
 exports.modifySauce = (req, res, next) => {
-	console.log(req.file);
 	const sauceObject = req.file
 		? {
 				...JSON.parse(req.body.sauce),
@@ -30,11 +29,16 @@ exports.modifySauce = (req, res, next) => {
 				}`,
 		  }
 		: { ...req.body };
-
+	if (req.file) {
+		Sauce.findOne({ _id: req.params.id }).then((sauce) => {
+			fs.unlink(`images/${sauce.imageUrl.split("/images/")[1]}`, () => {});
+		});
+	}
 	Sauce.updateOne(
 		{ _id: req.params.id },
 		{ ...sauceObject, _id: req.params.id }
 	)
+
 		.then(() => res.status(200).json({ message: "sauce modifiée." }))
 		.catch((error) => res.status(400).json({ error }));
 };
