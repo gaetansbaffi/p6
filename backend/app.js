@@ -3,15 +3,14 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
 const path = require("path");
-
 const sauceRoutes = require("./routes/sauces");
 const userRoutes = require("./routes/user");
+const config = require("./config");
+
+console.log(config.DB_URI);
 
 mongoose
-	.connect(
-		"mongodb+srv://gaetan:admin@p6ex.9sxni.mongodb.net/p6ex?retryWrites=true&w=majority",
-		{ useNewUrlParser: true, useUnifiedTopology: true }
-	)
+	.connect(config.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 	.then(() => console.log("Connexion à MongoDB réussie !"))
 	.catch(() => console.log("Connexion à MongoDB échouée !"));
 

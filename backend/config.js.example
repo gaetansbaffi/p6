@@ -1,0 +1,8 @@
+const DB_NAME = "";
+const DB_USER = "";
+const DB_PASSWORD = "";
+
+module.exports = {
+	DB_URI: `mongodb+srv://${DB_USER}:${DB_PASSWORD}@p6ex.9sxni.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
+	TOKEN: "RANDOM_SECRET_TOKEN",
+};
