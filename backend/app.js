@@ -7,8 +7,6 @@ const sauceRoutes = require("./routes/sauces");
 const userRoutes = require("./routes/user");
 const config = require("./config");
 
-console.log(config.DB_URI);
-
 mongoose
 	.connect(config.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 	.then(() => console.log("Connexion à MongoDB réussie !"))
@@ -30,8 +28,7 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use(bodyParser.json());
-
+app.use(bodyParser.json({ limit: "5mb" }));
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use("/api/sauces", sauceRoutes);

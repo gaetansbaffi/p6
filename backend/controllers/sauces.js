@@ -13,7 +13,7 @@ exports.createSauce = (req, res, next) => {
 		likes: 0,
 		dislikes: 0,
 	});
-	console.log(req.file);
+
 	sauce
 		.save()
 		.then(() => res.status(201).json({ message: "objet enregistré" }))
@@ -80,14 +80,14 @@ exports.likeSauce = (req, res, next) => {
 		if (like == 0 && userL != undefined) {
 			sauce.likes--;
 			sauce.usersLiked = sauce.usersLiked.filter((user) => user !== userId);
-			console.log(sauce.usersLiked, userId);
+
 			message = "vous avez annulé votre like";
 		} else if (like == 0 && userD != undefined) {
 			sauce.dislikes--;
 			sauce.usersDisliked = sauce.usersDisliked.filter(
 				(user) => user !== userId
 			);
-			console.log(sauce.usersDisliked, userId);
+
 			message = "vous avez annulé votre dislike";
 		}
 
@@ -98,7 +98,7 @@ exports.likeSauce = (req, res, next) => {
 			} else {
 				sauce.usersLiked.push(userId);
 			}
-			console.log(sauce.usersLiked);
+
 			message = "Like pris en compte !";
 		}
 
@@ -110,10 +110,9 @@ exports.likeSauce = (req, res, next) => {
 				sauce.usersDisliked.push(userId);
 			}
 
-			console.log(sauce.usersDisliked);
 			message = "Disike pris en compte !";
 		}
-		console.log(sauce);
+
 		sauce
 			.save()
 			.then(() => res.status(201).json({ message }))

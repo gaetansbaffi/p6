@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const config = require("../config");
+const validator = require("validator");
 
 exports.signup = (req, res, next) => {
 	bcrypt
@@ -10,6 +11,10 @@ exports.signup = (req, res, next) => {
 			const user = new User({
 				email: req.body.email,
 				password: hash,
+			}).then(() => {
+				if (!validator.isEmail(user.email)) {
+					throw new Error("Invalid email");
+				}
 			});
 			user
 				.save()
