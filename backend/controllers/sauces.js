@@ -4,6 +4,7 @@ const sauce = require("../models/sauce");
 
 exports.createSauce = (req, res, next) => {
 	const sauceObject = JSON.parse(req.body.sauce);
+
 	delete sauceObject._id;
 	const sauce = new Sauce({
 		...sauceObject,
@@ -29,11 +30,13 @@ exports.modifySauce = (req, res, next) => {
 				}`,
 		  }
 		: { ...req.body };
+
 	if (req.file) {
 		Sauce.findOne({ _id: req.params.id }).then((sauce) => {
 			fs.unlink(`images/${sauce.imageUrl.split("/images/")[1]}`, () => {});
 		});
 	}
+
 	Sauce.updateOne(
 		{ _id: req.params.id },
 		{ ...sauceObject, _id: req.params.id }

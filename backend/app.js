@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoSanitize = require("express-mongo-sanitize");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
 const path = require("path");
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json({ limit: "5mb" }));
+app.use(mongoSanitize());
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use("/api/sauces", sauceRoutes);
